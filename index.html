@@ -1,0 +1,132 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EasyKit — Free Online Tools</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f6f8fc;color:#182238}
+header{padding:22px 7%;display:flex;justify-content:space-between;align-items:center;background:white}
+.logo{font-size:25px;font-weight:800;color:#6555df}
+button{cursor:pointer;border:0;border-radius:9px;padding:11px 17px;background:#6555df;color:white;font-weight:bold}
+.hero{text-align:center;padding:55px 15px 35px}
+.hero h1{font-size:40px;margin:10px}
+.hero p{color:#667085}
+.tools{max-width:950px;margin:20px auto;padding:15px;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+.card{background:white;padding:22px;border-radius:15px;box-shadow:0 3px 15px #1822380d}
+.card h2{font-size:20px}
+textarea,input{width:100%;padding:12px;border:1px solid #dce1eb;border-radius:9px;margin:8px 0;font:inherit}
+textarea{height:110px;resize:vertical}
+.result{background:#f0efff;padding:12px;border-radius:9px;margin-top:10px}
+footer{text-align:center;padding:30px;color:#777}
+</style>
+</head>
+<body>
+
+<header>
+<div class="logo">EasyKit.</div>
+<button onclick="toggleLanguage()" id="lang">العربية</button>
+</header>
+
+<section class="hero">
+<h1 id="heading">Simple tools. Less work.</h1>
+<p id="subtitle">Free online tools to make your everyday tasks easier.</p>
+</section>
+
+<main class="tools">
+
+<div class="card">
+<h2 id="wordTitle">📝 Word Counter</h2>
+<textarea id="words" placeholder="Type or paste your text..." oninput="countWords()"></textarea>
+<div class="result" id="wordResult">Words: 0 | Characters: 0</div>
+</div>
+
+<div class="card">
+<h2 id="percentTitle">🧮 Percentage Calculator</h2>
+<input type="number" id="number" placeholder="Enter number">
+<input type="number" id="percent" placeholder="Enter percentage">
+<button onclick="calculate()" id="calculateBtn">Calculate</button>
+<div class="result" id="percentResult">Your result will appear here.</div>
+</div>
+
+<div class="card">
+<h2 id="textTitle">🔤 Text Case Converter</h2>
+<textarea id="convertText" placeholder="Enter text to convert..."></textarea>
+<button onclick="convert('upper')" id="upperBtn">UPPERCASE</button>
+<button onclick="convert('lower')" id="lowerBtn">lowercase</button>
+<div class="result" id="convertResult">Your converted text appears here.</div>
+</div>
+
+</main>
+
+<footer id="footer">© 2026 EasyKit. Simple tools for everyone.</footer>
+
+<script>
+let arabic = false;
+
+function countWords(){
+ const text = document.getElementById("words").value.trim();
+ const words = text ? text.split(/\s+/).length : 0;
+ const chars = document.getElementById("words").value.length;
+ document.getElementById("wordResult").textContent =
+ (arabic ? "الكلمات: " : "Words: ") + words +
+ " | " + (arabic ? "الأحرف: " : "Characters: ") + chars;
+}
+
+function calculate(){
+ const n = Number(document.getElementById("number").value);
+ const p = Number(document.getElementById("percent").value);
+ if(document.getElementById("number").value === "" ||
+    document.getElementById("percent").value === ""){
+  document.getElementById("percentResult").textContent =
+  arabic ? "أدخل الرقم والنسبة." : "Enter both numbers.";
+  return;
+ }
+ document.getElementById("percentResult").textContent =
+ (n*p/100).toLocaleString();
+}
+
+function convert(type){
+ const text = document.getElementById("convertText").value;
+ document.getElementById("convertResult").textContent =
+ type === "upper" ? text.toUpperCase() : text.toLowerCase();
+}
+
+function toggleLanguage(){
+ arabic = !arabic;
+ document.documentElement.lang = arabic ? "ar" : "en";
+ document.documentElement.dir = arabic ? "rtl" : "ltr";
+
+ const translations = {
+ heading:["Simple tools. Less work.","أدوات بسيطة. وقت أقل."],
+ subtitle:["Free online tools to make your everyday tasks easier.","أدوات مجانية لتسهيل مهامك اليومية."],
+ wordTitle:["📝 Word Counter","📝 عداد الكلمات"],
+ percentTitle:["🧮 Percentage Calculator","🧮 حاسبة النسبة المئوية"],
+ textTitle:["🔤 Text Case Converter","🔤 تحويل حالة النص"],
+ calculateBtn:["Calculate","احسب"],
+ upperBtn:["UPPERCASE","أحرف كبيرة"],
+ lowerBtn:["lowercase","أحرف صغيرة"],
+ footer:["© 2026 EasyKit. Simple tools for everyone.","© 2026 EasyKit. أدوات بسيطة للجميع."]
+ };
+
+ for(const id in translations){
+  document.getElementById(id).textContent =
+  translations[id][arabic ? 1 : 0];
+ }
+
+ document.getElementById("lang").textContent =
+ arabic ? "English" : "العربية";
+
+ document.getElementById("words").placeholder =
+ arabic ? "اكتب أو الصق النص هنا..." : "Type or paste your text...";
+
+ document.getElementById("convertText").placeholder =
+ arabic ? "أدخل النص للتحويل..." : "Enter text to convert...";
+
+ countWords();
+}
+</script>
+</body>
+</html>
