@@ -1,132 +1,813 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="EasyKit offers free online tools including a word counter, percentage calculator, text converter, QR generator, password generator and age calculator.">
+<meta name="theme-color" content="#6555df">
 <title>EasyKit — Free Online Tools</title>
+
 <style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f6f8fc;color:#182238}
-header{padding:22px 7%;display:flex;justify-content:space-between;align-items:center;background:white}
-.logo{font-size:25px;font-weight:800;color:#6555df}
-button{cursor:pointer;border:0;border-radius:9px;padding:11px 17px;background:#6555df;color:white;font-weight:bold}
-.hero{text-align:center;padding:55px 15px 35px}
-.hero h1{font-size:40px;margin:10px}
-.hero p{color:#667085}
-.tools{max-width:950px;margin:20px auto;padding:15px;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
-.card{background:white;padding:22px;border-radius:15px;box-shadow:0 3px 15px #1822380d}
-.card h2{font-size:20px}
-textarea,input{width:100%;padding:12px;border:1px solid #dce1eb;border-radius:9px;margin:8px 0;font:inherit}
-textarea{height:110px;resize:vertical}
-.result{background:#f0efff;padding:12px;border-radius:9px;margin-top:10px}
-footer{text-align:center;padding:30px;color:#777}
+:root {
+  --primary: #6555df;
+  --primary-dark: #5040c5;
+  --bg: #f5f6fc;
+  --card: #ffffff;
+  --text: #182238;
+  --muted: #697386;
+  --border: #e6e8f0;
+  --soft: #f0efff;
+  --shadow: 0 8px 30px rgba(25, 30, 65, .06);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+header {
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  padding: 17px 7%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.logo {
+  color: var(--primary);
+  font-size: 26px;
+  font-weight: 900;
+  text-decoration: none;
+  letter-spacing: -1px;
+}
+
+button {
+  cursor: pointer;
+  border: 0;
+  border-radius: 10px;
+  padding: 11px 17px;
+  background: var(--primary);
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  transition: .2s;
+}
+
+button:hover {
+  background: var(--primary-dark);
+  transform: translateY(-1px);
+}
+
+button:focus-visible, input:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid #bcb4ff;
+  outline-offset: 2px;
+}
+
+.secondary {
+  background: var(--soft);
+  color: var(--primary);
+}
+
+.secondary:hover {
+  background: #e5e1ff;
+}
+
+.hero {
+  text-align: center;
+  padding: 65px 18px 35px;
+}
+
+.tag {
+  display: inline-block;
+  background: var(--soft);
+  color: var(--primary);
+  padding: 6px 13px;
+  border-radius: 30px;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.hero h1 {
+  font-size: clamp(32px, 5vw, 48px);
+  line-height: 1.2;
+  margin: 17px 0 12px;
+  letter-spacing: -1.5px;
+}
+
+.hero p {
+  color: var(--muted);
+  font-size: 17px;
+  max-width: 550px;
+  margin: auto;
+}
+
+.section-heading {
+  text-align: center;
+  margin: 25px 0 5px;
+  font-size: 25px;
+}
+
+.section-description {
+  text-align: center;
+  color: var(--muted);
+  margin: 0 15px 20px;
+}
+
+.tools {
+  max-width: 1120px;
+  margin: 25px auto 65px;
+  padding: 15px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: var(--card);
+  padding: 23px;
+  border-radius: 17px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  min-width: 0;
+  transition: transform .2s, box-shadow .2s;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 35px rgba(25, 30, 65, .09);
+}
+
+.card h2 {
+  font-size: 19px;
+  margin: 0 0 6px;
+}
+
+.card .description {
+  font-size: 13px;
+  color: var(--muted);
+  margin: 0 0 16px;
+}
+
+textarea, input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  margin: 7px 0;
+  font: inherit;
+  color: var(--text);
+  background: white;
+}
+
+textarea {
+  height: 115px;
+  resize: vertical;
+}
+
+input[type="range"] {
+  accent-color: var(--primary);
+}
+
+.result {
+  background: var(--soft);
+  padding: 12px;
+  border-radius: 10px;
+  margin-top: 12px;
+  font-size: 14px;
+  overflow-wrap: anywhere;
+  min-height: 43px;
+}
+
+.stats {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 9px;
+}
+
+.actions button {
+  flex: 1;
+  min-width: 90px;
+}
+
+.small-label {
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: bold;
+  display: block;
+  margin-top: 10px;
+}
+
+.qr-output {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+  min-height: 20px;
+}
+
+.qr-output img, .qr-output canvas {
+  max-width: 100%;
+  height: auto;
+  background: white;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.check-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  margin: 8px 0;
+}
+
+.check-row input {
+  width: auto;
+  margin: 0;
+  accent-color: var(--primary);
+}
+
+footer {
+  text-align: center;
+  padding: 30px 15px;
+  background: white;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+  font-size: 13px;
+}
+
+footer strong { color: var(--primary); }
+
+[dir="rtl"] body { text-align: right; }
+[dir="rtl"] .stats { flex-direction: row-reverse; }
+[dir="rtl"] .check-row { flex-direction: row-reverse; justify-content: flex-end; }
+
+@media(max-width:600px) {
+  header { padding: 14px 5%; }
+  .hero { padding: 45px 15px 25px; }
+  .tools { padding: 12px; gap: 14px; }
+  .card { padding: 19px; }
+  .hero p { font-size: 15px; }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  *, *::before, *::after {
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
 </style>
 </head>
+
 <body>
 
 <header>
-<div class="logo">EasyKit.</div>
-<button onclick="toggleLanguage()" id="lang">العربية</button>
+  <a class="logo" href="#">EasyKit.</a>
+  <button class="secondary" onclick="toggleLanguage()" id="langBtn">العربية</button>
 </header>
 
 <section class="hero">
-<h1 id="heading">Simple tools. Less work.</h1>
-<p id="subtitle">Free online tools to make your everyday tasks easier.</p>
+  <span class="tag" id="tagline">✨ FREE ONLINE TOOLS</span>
+  <h1 id="heading">Simple tools. Less work.</h1>
+  <p id="subtitle">Free online tools to make your everyday tasks easier. Fast, simple and easy to use.</p>
 </section>
+
+<h2 class="section-heading" id="toolsHeading">Our Free Tools</h2>
+<p class="section-description" id="toolsDescription">Everything you need in one simple place.</p>
 
 <main class="tools">
 
+<!-- WORD COUNTER -->
 <div class="card">
-<h2 id="wordTitle">📝 Word Counter</h2>
-<textarea id="words" placeholder="Type or paste your text..." oninput="countWords()"></textarea>
-<div class="result" id="wordResult">Words: 0 | Characters: 0</div>
+  <h2 id="wordTitle">📝 Word Counter</h2>
+  <p class="description" id="wordDesc">Count words, characters and reading time.</p>
+  <textarea id="words" placeholder="Type or paste your text..." oninput="countWords()"></textarea>
+  <div class="result" id="wordResult">Words: 0 | Characters: 0</div>
+  <div class="stats">
+    <span id="readingTime">Reading time: 0 min</span>
+    <span id="sentenceCount">Sentences: 0</span>
+  </div>
 </div>
 
+<!-- PERCENTAGE CALCULATOR -->
 <div class="card">
-<h2 id="percentTitle">🧮 Percentage Calculator</h2>
-<input type="number" id="number" placeholder="Enter number">
-<input type="number" id="percent" placeholder="Enter percentage">
-<button onclick="calculate()" id="calculateBtn">Calculate</button>
-<div class="result" id="percentResult">Your result will appear here.</div>
+  <h2 id="percentTitle">🧮 Percentage Calculator</h2>
+  <p class="description" id="percentDesc">Calculate any percentage quickly.</p>
+  <label class="small-label" id="numberLabel" for="number">Number</label>
+  <input type="number" id="number" placeholder="Enter number">
+  <label class="small-label" id="percentLabel" for="percent">Percentage (%)</label>
+  <input type="number" id="percent" placeholder="Enter percentage">
+  <button onclick="calculate()" id="calculateBtn">Calculate</button>
+  <div class="result" id="percentResult" aria-live="polite">Your result will appear here.</div>
 </div>
 
+<!-- TEXT CONVERTER -->
 <div class="card">
-<h2 id="textTitle">🔤 Text Case Converter</h2>
-<textarea id="convertText" placeholder="Enter text to convert..."></textarea>
-<button onclick="convert('upper')" id="upperBtn">UPPERCASE</button>
-<button onclick="convert('lower')" id="lowerBtn">lowercase</button>
-<div class="result" id="convertResult">Your converted text appears here.</div>
+  <h2 id="textTitle">🔤 Text Case Converter</h2>
+  <p class="description" id="textDesc">Change your text into different styles.</p>
+  <textarea id="convertText" placeholder="Enter text to convert..."></textarea>
+  <div class="actions">
+    <button onclick="convert('upper')" id="upperBtn">UPPERCASE</button>
+    <button onclick="convert('lower')" id="lowerBtn">lowercase</button>
+    <button onclick="convert('title')" id="titleBtn">Title Case</button>
+    <button onclick="convert('sentence')" id="sentenceBtn">Sentence case</button>
+  </div>
+  <div class="result" id="convertResult" aria-live="polite">Your converted text appears here.</div>
+  <button class="secondary" onclick="copyText('convertResult')" id="copyTextBtn" style="margin-top:10px">Copy Text</button>
+</div>
+
+<!-- QR GENERATOR -->
+<div class="card">
+  <h2 id="qrTitle">📱 QR Code Generator</h2>
+  <p class="description" id="qrDesc">Turn text or a website address into a QR code.</p>
+  <input id="qrInput" placeholder="Enter text or website address">
+  <button onclick="generateQR()" id="qrBtn">Generate QR Code</button>
+  <div class="qr-output" id="qrOutput"></div>
+  <button class="secondary" onclick="downloadQR()" id="qrDownload" style="display:none;margin-top:12px">Download QR Code</button>
+  <div class="result" id="qrMessage" aria-live="polite">Your QR code will appear here.</div>
+</div>
+
+<!-- PASSWORD GENERATOR -->
+<div class="card">
+  <h2 id="passwordTitle">🔐 Password Generator</h2>
+  <p class="description" id="passwordDesc">Create a random password on your device.</p>
+  <label class="small-label" id="lengthLabel" for="passLength">Password length: 16</label>
+  <input type="range" id="passLength" min="8" max="40" value="16" oninput="updateLength()">
+  <label class="check-row"><input type="checkbox" id="includeUpper" checked> <span id="upperLabel">Uppercase letters (A-Z)</span></label>
+  <label class="check-row"><input type="checkbox" id="includeLower" checked> <span id="lowerLabel">Lowercase letters (a-z)</span></label>
+  <label class="check-row"><input type="checkbox" id="includeNumbers" checked> <span id="numberCharsLabel">Numbers (0-9)</span></label>
+  <label class="check-row"><input type="checkbox" id="includeSymbols" checked> <span id="symbolsLabel">Symbols (!@#$...)</span></label>
+  <button onclick="generatePassword()" id="passBtn">Generate Password</button>
+  <div class="result" id="passwordResult" aria-live="polite">Your password will appear here.</div>
+  <button class="secondary" onclick="copyText('passwordResult')" id="copyPassBtn" style="margin-top:10px">Copy Password</button>
+</div>
+
+<!-- AGE CALCULATOR -->
+<div class="card">
+  <h2 id="ageTitle">🎂 Age Calculator</h2>
+  <p class="description" id="ageDesc">Find your age in years, months and days.</p>
+  <label class="small-label" id="birthLabel" for="birthDate">Your date of birth</label>
+  <input type="date" id="birthDate">
+  <button onclick="calculateAge()" id="ageBtn">Calculate Age</button>
+  <div class="result" id="ageResult" aria-live="polite">Your age will appear here.</div>
 </div>
 
 </main>
 
-<footer id="footer">© 2026 EasyKit. Simple tools for everyone.</footer>
+<footer>
+  <strong>EasyKit.</strong>
+  <p id="footerText">© 2026 EasyKit. Free tools for everyone.</p>
+</footer>
+
+<!-- QR code library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
 <script>
 let arabic = false;
 
-function countWords(){
- const text = document.getElementById("words").value.trim();
- const words = text ? text.split(/\s+/).length : 0;
- const chars = document.getElementById("words").value.length;
- document.getElementById("wordResult").textContent =
- (arabic ? "الكلمات: " : "Words: ") + words +
- " | " + (arabic ? "الأحرف: " : "Characters: ") + chars;
+const translations = {
+  en: {
+    lang:"العربية",
+    tagline:"✨ FREE ONLINE TOOLS",
+    heading:"Simple tools. Less work.",
+    subtitle:"Free online tools to make your everyday tasks easier. Fast, simple and easy to use.",
+    toolsHeading:"Our Free Tools",
+    toolsDescription:"Everything you need in one simple place.",
+    wordTitle:"📝 Word Counter",
+    wordDesc:"Count words, characters and reading time.",
+    wordPlaceholder:"Type or paste your text...",
+    percentTitle:"🧮 Percentage Calculator",
+    percentDesc:"Calculate any percentage quickly.",
+    numberLabel:"Number",
+    percentLabel:"Percentage (%)",
+    numberPlaceholder:"Enter number",
+    percentPlaceholder:"Enter percentage",
+    calculateBtn:"Calculate",
+    resultPlaceholder:"Your result will appear here.",
+    textTitle:"🔤 Text Case Converter",
+    textDesc:"Change your text into different styles.",
+    textPlaceholder:"Enter text to convert...",
+    upperBtn:"UPPERCASE",
+    lowerBtn:"lowercase",
+    titleBtn:"Title Case",
+    sentenceBtn:"Sentence case",
+    copyTextBtn:"Copy Text",
+    converted:"Your converted text appears here.",
+    qrTitle:"📱 QR Code Generator",
+    qrDesc:"Turn text or a website address into a QR code.",
+    qrPlaceholder:"Enter text or website address",
+    qrBtn:"Generate QR Code",
+    qrDownload:"Download QR Code",
+    qrEmpty:"Please enter some text first.",
+    qrError:"QR code library could not load. Check your internet connection and refresh.",
+    qrSuccess:"Your QR code is ready!",
+    passwordTitle:"🔐 Password Generator",
+    passwordDesc:"Create a random password on your device.",
+    lengthLabel:"Password length: ",
+    upperLabel:"Uppercase letters (A-Z)",
+    lowerLabel:"Lowercase letters (a-z)",
+    numberCharsLabel:"Numbers (0-9)",
+    symbolsLabel:"Symbols (!@#$...)",
+    passBtn:"Generate Password",
+    passEmpty:"Select at least one character type.",
+    passResult:"Your password will appear here.",
+    copyPassBtn:"Copy Password",
+    ageTitle:"🎂 Age Calculator",
+    ageDesc:"Find your age in years, months and days.",
+    birthLabel:"Your date of birth",
+    ageBtn:"Calculate Age",
+    agePlaceholder:"Your age will appear here.",
+    ageInvalid:"Please enter a valid date that is not in the future.",
+    reading:"Reading time: ",
+    min:" min",
+    sentences:"Sentences: ",
+    words:"Words: ",
+    characters:"Characters: ",
+    copied:"Copied!",
+    copyError:"Could not copy. Please select and copy the text.",
+    enterBoth:"Enter both numbers.",
+    invalidNumber:"Please enter valid numbers.",
+    noResult:"Your converted text appears here.",
+    ageYears:" years, ",
+    ageMonths:" months and ",
+    ageDays:" days",
+    footer:"© 2026 EasyKit. Free tools for everyone."
+  },
+  ar: {
+    lang:"English",
+    tagline:"✨ أدوات مجانية عبر الإنترنت",
+    heading:"أدوات بسيطة. وقت أقل.",
+    subtitle:"أدوات مجانية لتسهيل مهامك اليومية. سريعة وبسيطة وسهلة الاستخدام.",
+    toolsHeading:"أدواتنا المجانية",
+    toolsDescription:"كل ما تحتاجه في مكان واحد.",
+    wordTitle:"📝 عداد الكلمات",
+    wordDesc:"احسب الكلمات والأحرف ووقت القراءة.",
+    wordPlaceholder:"اكتب أو الصق النص هنا...",
+    percentTitle:"🧮 حاسبة النسبة المئوية",
+    percentDesc:"احسب أي نسبة مئوية بسهولة.",
+    numberLabel:"الرقم",
+    percentLabel:"النسبة المئوية (%)",
+    numberPlaceholder:"أدخل الرقم",
+    percentPlaceholder:"أدخل النسبة",
+    calculateBtn:"احسب",
+    resultPlaceholder:"ستظهر النتيجة هنا.",
+    textTitle:"🔤 تحويل حالة النص",
+    textDesc:"حوّل النص إلى أنماط مختلفة.",
+    textPlaceholder:"أدخل النص للتحويل...",
+    upperBtn:"أحرف كبيرة",
+    lowerBtn:"أحرف صغيرة",
+    titleBtn:"أول حرف كبير",
+    sentenceBtn:"نمط الجملة",
+    copyTextBtn:"نسخ النص",
+    converted:"سيظهر النص المحوّل هنا.",
+    qrTitle:"📱 منشئ رمز QR",
+    qrDesc:"حوّل النص أو رابط الموقع إلى رمز QR.",
+    qrPlaceholder:"أدخل نصاً أو رابط موقع",
+    qrBtn:"إنشاء رمز QR",
+    qrDownload:"تحميل رمز QR",
+    qrEmpty:"يرجى إدخال نص أولاً.",
+    qrError:"تعذر تحميل مكتبة QR. تحقق من الإنترنت ثم حدّث الصفحة.",
+    qrSuccess:"رمز QR جاهز!",
+    passwordTitle:"🔐 منشئ كلمات المرور",
+    passwordDesc:"أنشئ كلمة مرور عشوائية على جهازك.",
+    lengthLabel:"طول كلمة المرور: ",
+    upperLabel:"أحرف كبيرة (A-Z)",
+    lowerLabel:"أحرف صغيرة (a-z)",
+    numberCharsLabel:"أرقام (0-9)",
+    symbolsLabel:"رموز (!@#$...)",
+    passBtn:"إنشاء كلمة مرور",
+    passEmpty:"اختر نوعاً واحداً على الأقل من الأحرف.",
+    passResult:"ستظهر كلمة المرور هنا.",
+    copyPassBtn:"نسخ كلمة المرور",
+    ageTitle:"🎂 حاسبة العمر",
+    ageDesc:"اعرف عمرك بالسنوات والأشهر والأيام.",
+    birthLabel:"تاريخ ميلادك",
+    ageBtn:"احسب العمر",
+    agePlaceholder:"سيظهر عمرك هنا.",
+    ageInvalid:"يرجى إدخال تاريخ صحيح ليس في المستقبل.",
+    reading:"وقت القراءة: ",
+    min:" دقيقة",
+    sentences:"الجمل: ",
+    words:"الكلمات: ",
+    characters:"الأحرف: ",
+    copied:"تم النسخ!",
+    copyError:"تعذر النسخ. يرجى تحديد النص ونسخه.",
+    enterBoth:"أدخل الرقمين.",
+    invalidNumber:"يرجى إدخال أرقام صحيحة.",
+    noResult:"سيظهر النص المحوّل هنا.",
+    ageYears:" سنة، ",
+    ageMonths:" شهر و",
+    ageDays:" يوم",
+    footer:"© 2026 EasyKit. أدوات مجانية للجميع."
+  }
+};
+
+function t(key) {
+  return translations[arabic ? "ar" : "en"][key];
 }
 
-function calculate(){
- const n = Number(document.getElementById("number").value);
- const p = Number(document.getElementById("percent").value);
- if(document.getElementById("number").value === "" ||
-    document.getElementById("percent").value === ""){
+function toggleLanguage() {
+  arabic = !arabic;
+  document.documentElement.lang = arabic ? "ar" : "en";
+  document.documentElement.dir = arabic ? "rtl" : "ltr";
+
+  for (const key in translations.en) {
+    const element = document.getElementById(key);
+    if (element && element.tagName !== "INPUT" && element.tagName !== "TEXTAREA") {
+      element.textContent = t(key);
+    }
+  }
+
+  document.getElementById("langBtn").textContent = t("lang");
+  document.getElementById("words").placeholder = t("wordPlaceholder");
+  document.getElementById("number").placeholder = t("numberPlaceholder");
+  document.getElementById("percent").placeholder = t("percentPlaceholder");
+  document.getElementById("convertText").placeholder = t("textPlaceholder");
+  document.getElementById("qrInput").placeholder = t("qrPlaceholder");
+  updateLength();
+  countWords();
+}
+
+// WORD COUNTER
+function countWords() {
+  const text = document.getElementById("words").value;
+  const trimmed = text.trim();
+  const words = trimmed ? trimmed.split(/\s+/u).length : 0;
+  const chars = text.length;
+  const sentences = trimmed ? (trimmed.match(/[.!?؟]+/g) || []).length : 0;
+  const minutes = words === 0 ? 0 : Math.max(1, Math.ceil(words / 200));
+
+  document.getElementById("wordResult").textContent =
+    t("words") + words + " | " + t("characters") + chars;
+
+  document.getElementById("readingTime").textContent =
+    t("reading") + minutes + t("min");
+
+  document.getElementById("sentenceCount").textContent =
+    t("sentences") + sentences;
+}
+
+// PERCENTAGE CALCULATOR
+function calculate() {
+  const numberInput = document.getElementById("number").value;
+  const percentInput = document.getElementById("percent").value;
+
+  if (numberInput.trim() === "" || percentInput.trim() === "") {
+    document.getElementById("percentResult").textContent = t("enterBoth");
+    return;
+  }
+
+  const n = Number(numberInput);
+  const p = Number(percentInput);
+
+  if (!Number.isFinite(n) || !Number.isFinite(p)) {
+    document.getElementById("percentResult").textContent = t("invalidNumber");
+    return;
+  }
+
+  const result = n * p / 100;
+
   document.getElementById("percentResult").textContent =
-  arabic ? "أدخل الرقم والنسبة." : "Enter both numbers.";
-  return;
- }
- document.getElementById("percentResult").textContent =
- (n*p/100).toLocaleString();
+    result.toLocaleString(arabic ? "ar-EG" : "en-US", {
+      maximumFractionDigits: 6
+    });
 }
 
-function convert(type){
- const text = document.getElementById("convertText").value;
- document.getElementById("convertResult").textContent =
- type === "upper" ? text.toUpperCase() : text.toLowerCase();
+// TEXT CONVERTER
+function convert(type) {
+  const text = document.getElementById("convertText").value;
+  let result = "";
+
+  if (type === "upper") {
+    result = text.toUpperCase();
+  } else if (type === "lower") {
+    result = text.toLowerCase();
+  } else if (type === "title") {
+    result = text.toLowerCase().replace(/\b\p{L}/gu, char => char.toUpperCase());
+  } else if (type === "sentence") {
+    result = text.toLowerCase().replace(/(^\s*\p{L}|[.!?؟]\s*\p{L})/gu,
+      char => char.toUpperCase());
+  }
+
+  document.getElementById("convertResult").textContent =
+    result || t("noResult");
 }
 
-function toggleLanguage(){
- arabic = !arabic;
- document.documentElement.lang = arabic ? "ar" : "en";
- document.documentElement.dir = arabic ? "rtl" : "ltr";
+// COPY TEXT
+async function copyText(id) {
+  const text = document.getElementById(id).textContent;
 
- const translations = {
- heading:["Simple tools. Less work.","أدوات بسيطة. وقت أقل."],
- subtitle:["Free online tools to make your everyday tasks easier.","أدوات مجانية لتسهيل مهامك اليومية."],
- wordTitle:["📝 Word Counter","📝 عداد الكلمات"],
- percentTitle:["🧮 Percentage Calculator","🧮 حاسبة النسبة المئوية"],
- textTitle:["🔤 Text Case Converter","🔤 تحويل حالة النص"],
- calculateBtn:["Calculate","احسب"],
- upperBtn:["UPPERCASE","أحرف كبيرة"],
- lowerBtn:["lowercase","أحرف صغيرة"],
- footer:["© 2026 EasyKit. Simple tools for everyone.","© 2026 EasyKit. أدوات بسيطة للجميع."]
- };
+  if (!text || text === t("noResult") || text === t("passResult")) return;
 
- for(const id in translations){
-  document.getElementById(id).textContent =
-  translations[id][arabic ? 1 : 0];
- }
+  try {
+    await navigator.clipboard.writeText(text);
+    const button = id === "passwordResult"
+      ? document.getElementById("copyPassBtn")
+      : document.getElementById("copyTextBtn");
 
- document.getElementById("lang").textContent =
- arabic ? "English" : "العربية";
-
- document.getElementById("words").placeholder =
- arabic ? "اكتب أو الصق النص هنا..." : "Type or paste your text...";
-
- document.getElementById("convertText").placeholder =
- arabic ? "أدخل النص للتحويل..." : "Enter text to convert...";
-
- countWords();
+    const oldText = button.textContent;
+    button.textContent = t("copied");
+    setTimeout(() => button.textContent = oldText, 1500);
+  } catch {
+    alert(t("copyError"));
+  }
 }
+
+// QR CODE GENERATOR
+function generateQR() {
+  const value = document.getElementById("qrInput").value.trim();
+  const output = document.getElementById("qrOutput");
+  const message = document.getElementById("qrMessage");
+  const download = document.getElementById("qrDownload");
+
+  output.innerHTML = "";
+  download.style.display = "none";
+
+  if (!value) {
+    message.textContent = t("qrEmpty");
+    return;
+  }
+
+  if (typeof QRCode === "undefined") {
+    message.textContent = t("qrError");
+    return;
+  }
+
+  new QRCode(output, {
+    text: value,
+    width: 200,
+    height: 200,
+    colorDark: "#182238",
+    colorLight: "#ffffff",
+    correctLevel: QRCode.CorrectLevel.H
+  });
+
+  message.textContent = t("qrSuccess");
+  download.style.display = "inline-block";
+}
+
+function downloadQR() {
+  const output = document.getElementById("qrOutput");
+  const canvas = output.querySelector("canvas");
+  const image = output.querySelector("img");
+  let url = "";
+
+  if (canvas) {
+    url = canvas.toDataURL("image/png");
+  } else if (image) {
+    url = image.src;
+  }
+
+  if (!url) return;
+
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "easykit-qr.png";
+  link.click();
+}
+
+// PASSWORD GENERATOR
+function updateLength() {
+  const length = document.getElementById("passLength").value;
+  document.getElementById("lengthLabel").textContent =
+    t("lengthLabel") + length;
+}
+
+function secureRandom(max) {
+  const array = new Uint32Array(1);
+  const limit = Math.floor(4294967296 / max) * max;
+
+  do {
+    crypto.getRandomValues(array);
+  } while (array[0] >= limit);
+
+  return array[0] % max;
+}
+
+function shuffleSecure(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = secureRandom(i + 1);
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+function generatePassword() {
+  const length = Number(document.getElementById("passLength").value);
+  const groups = [];
+
+  if (document.getElementById("includeUpper").checked)
+    groups.push("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+
+  if (document.getElementById("includeLower").checked)
+    groups.push("abcdefghijklmnopqrstuvwxyz");
+
+  if (document.getElementById("includeNumbers").checked)
+    groups.push("0123456789");
+
+  if (document.getElementById("includeSymbols").checked)
+    groups.push("!@#$%^&*()-_=+[]{}");
+
+  if (!groups.length) {
+    document.getElementById("passwordResult").textContent = t("passEmpty");
+    return;
+  }
+
+  const allChars = groups.join("");
+  const password = [];
+
+  // Include at least one character from each selected group.
+  groups.forEach(group => {
+    password.push(group[secureRandom(group.length)]);
+  });
+
+  while (password.length < length) {
+    password.push(allChars[secureRandom(allChars.length)]);
+  }
+
+  document.getElementById("passwordResult").textContent =
+    shuffleSecure(password).join("");
+}
+
+// AGE CALCULATOR
+function calculateAge() {
+  const value = document.getElementById("birthDate").value;
+  const result = document.getElementById("ageResult");
+
+  if (!value) {
+    result.textContent = t("ageInvalid");
+    return;
+  }
+
+  const parts = value.split("-").map(Number);
+  const year = parts[0];
+  const month = parts[1];
+  const day = parts[2];
+
+  const birth = new Date(year, month - 1, day);
+  const today = new Date();
+
+  // Reject impossible dates and future dates.
+  if (
+    birth.getFullYear() !== year ||
+    birth.getMonth() !== month - 1 ||
+    birth.getDate() !== day ||
+    birth > today
+  ) {
+    result.textContent = t("ageInvalid");
+    return;
+  }
+
+  let years = today.getFullYear() - year;
+  let months = today.getMonth() - (month - 1);
+  let days = today.getDate() - day;
+
+  if (days < 0) {
+    months--;
+    const previousMonth = new Date(
+      today.getFullYear(), today.getMonth(), 0
+    );
+    days += previousMonth.getDate();
+  }
+
+  if (months < 0) {
+    years--;
+    months += 12;
+  }
+
+  result.textContent =
+    years + t("ageYears") +
+    months + t("ageMonths") +
+    days + t("ageDays");
+}
+
+// INITIALIZE
+document.getElementById("birthDate").max =
+  new Date().toLocaleDateString("en-CA");
+
+updateLength();
+countWords();
 </script>
+
 </body>
 </html>
