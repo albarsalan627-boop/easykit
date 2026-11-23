@@ -1,370 +1,182 @@
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<meta name="description" content="EasyKit provides free online tools: word counter, percentage calculator, text case converter, QR code generator, password generator and age calculator.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="EasyKit offers 16 free online tools including calculators, converters, text tools, QR codes, image compression and more.">
 <meta name="theme-color" content="#2563eb">
-
 <meta property="og:title" content="EasyKit — Free Online Tools">
-<meta property="og:description" content="Simple, useful online tools that save you time.">
+<meta property="og:description" content="16 useful, free online tools in one place.">
 <meta property="og:type" content="website">
-
-<title>EasyKit — Free Online Tools | Word Counter, QR Generator & More</title>
+<title>EasyKit — 16 Free Online Tools</title>
 
 <style>
 :root {
-  --primary: #2563eb;
-  --primary-dark: #1d4ed8;
-  --bg: #f8faff;
-  --card: #ffffff;
-  --text: #172554;
-  --muted: #64748b;
-  --border: #e2e8f0;
-  --soft: #eff6ff;
-  --shadow: 0 8px 30px rgba(37, 99, 235, .07);
+  --primary:#2563eb;
+  --dark:#1d4ed8;
+  --bg:#f8faff;
+  --card:#fff;
+  --text:#172554;
+  --muted:#64748b;
+  --border:#e2e8f0;
+  --soft:#eff6ff;
+  --shadow:0 8px 30px rgba(37,99,235,.07);
 }
-
-* {
-  box-sizing: border-box;
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6
 }
-
-html {
-  scroll-behavior: smooth;
+header{
+  background:#ffffffed;
+  border-bottom:1px solid var(--border);
+  padding:15px 7%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  position:sticky;
+  top:0;
+  z-index:10;
+  backdrop-filter:blur(10px)
 }
-
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.6;
+.logo{
+  color:var(--primary);
+  font-size:27px;
+  font-weight:900;
+  text-decoration:none;
+  letter-spacing:-1px
 }
-
-header {
-  background: rgba(255,255,255,.96);
-  border-bottom: 1px solid var(--border);
-  padding: 15px 7%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  backdrop-filter: blur(10px);
+button{
+  cursor:pointer;
+  border:0;
+  border-radius:10px;
+  padding:11px 16px;
+  background:var(--primary);
+  color:white;
+  font-size:14px;
+  font-weight:bold;
+  transition:.2s
 }
-
-.logo {
-  color: var(--primary);
-  font-size: 27px;
-  font-weight: 900;
-  text-decoration: none;
-  letter-spacing: -1px;
-  direction: ltr;
-  unicode-bidi: isolate;
+button:hover{background:var(--dark);transform:translateY(-1px)}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{
+  outline:3px solid #93c5fd;
+  outline-offset:2px
 }
-
-button {
-  cursor: pointer;
-  border: 0;
-  border-radius: 10px;
-  padding: 11px 17px;
-  background: var(--primary);
-  color: white;
-  font-size: 14px;
-  font-weight: 700;
-  transition: background .2s, transform .2s;
+.secondary{background:var(--soft);color:var(--primary)}
+.secondary:hover{background:#dbeafe;color:var(--dark)}
+.hero{
+  text-align:center;
+  padding:70px 18px 40px;
+  background:radial-gradient(circle at 50% 0%,#dbeafe,transparent 65%)
 }
-
-button:hover {
-  background: var(--primary-dark);
-  transform: translateY(-1px);
+.tag{
+  display:inline-block;
+  background:#dbeafe;
+  color:var(--dark);
+  padding:7px 15px;
+  border-radius:30px;
+  font-size:13px;
+  font-weight:bold
 }
-
-button:focus-visible,
-input:focus-visible,
-textarea:focus-visible {
-  outline: 3px solid #93c5fd;
-  outline-offset: 2px;
+.hero h1{
+  font-size:clamp(34px,5vw,54px);
+  line-height:1.15;
+  margin:20px 0 14px;
+  letter-spacing:-1.5px
 }
-
-.secondary {
-  background: var(--soft);
-  color: var(--primary);
+.hero p{color:var(--muted);font-size:17px;max-width:600px;margin:auto}
+.search-wrap{max-width:500px;margin:28px auto 0}
+.search-wrap input{
+  width:100%;
+  padding:16px 19px;
+  border:1px solid var(--border);
+  border-radius:14px;
+  background:white;
+  box-shadow:var(--shadow);
+  font-size:15px
 }
-
-.secondary:hover {
-  background: #dbeafe;
-  color: var(--primary-dark);
+.section-heading{text-align:center;margin:35px 0 5px;font-size:27px}
+.section-description{text-align:center;color:var(--muted);margin:0 15px 20px}
+.tools{
+  max-width:1200px;
+  margin:25px auto 65px;
+  padding:15px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));
+  gap:20px
 }
-
-.hero {
-  text-align: center;
-  padding: 75px 18px 45px;
-  background:
-    radial-gradient(circle at 50% 0%, #dbeafe 0%, transparent 65%);
+.card{
+  background:var(--card);
+  padding:23px;
+  border-radius:18px;
+  border:1px solid var(--border);
+  box-shadow:var(--shadow);
+  min-width:0;
+  transition:.2s
 }
-
-.tag {
-  display: inline-block;
-  background: #dbeafe;
-  color: var(--primary-dark);
-  padding: 7px 15px;
-  border-radius: 30px;
-  font-size: 13px;
-  font-weight: bold;
+.card:hover{transform:translateY(-3px);box-shadow:0 13px 35px #2563eb1c}
+.card[hidden]{display:none}
+.card h2{font-size:19px;margin:0 0 6px}
+.description{font-size:13px;color:var(--muted);margin:0 0 16px}
+textarea,input,select{
+  width:100%;
+  padding:12px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  margin:7px 0;
+  font:inherit;
+  color:var(--text);
+  background:white
 }
-
-.hero h1 {
-  font-size: clamp(34px, 5vw, 54px);
-  line-height: 1.15;
-  margin: 20px 0 14px;
-  letter-spacing: -1.7px;
+textarea{height:105px;resize:vertical}
+input[type=range]{accent-color:var(--primary)}
+input[type=color]{height:48px;padding:4px}
+input[type=checkbox]{width:auto;margin:0;accent-color:var(--primary)}
+input[type=file]{font-size:13px}
+.result{
+  background:var(--soft);
+  color:var(--text);
+  padding:12px;
+  border-radius:10px;
+  margin-top:12px;
+  font-size:14px;
+  overflow-wrap:anywhere;
+  min-height:43px;
+  white-space:pre-wrap
 }
-
-.hero p {
-  color: var(--muted);
-  font-size: 17px;
-  max-width: 570px;
-  margin: auto;
+.stats{display:flex;justify-content:space-between;gap:8px;margin-top:10px;color:var(--muted);font-size:12px}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:9px}
+.actions button{flex:1;min-width:85px}
+.small-label{font-size:13px;color:var(--muted);font-weight:bold;display:block;margin-top:10px}
+.check-row{display:flex;align-items:center;gap:8px;font-size:13px;margin:8px 0}
+.qr-output{display:flex;justify-content:center;margin-top:15px}
+.qr-output img,.qr-output canvas{max-width:100%;height:auto;background:white;padding:10px;border-radius:10px}
+.no-results{display:none;text-align:center;color:var(--muted);padding:25px;grid-column:1/-1}
+footer{text-align:center;padding:32px 15px;background:white;color:var(--muted);border-top:1px solid var(--border);font-size:13px}
+footer strong{color:var(--primary);font-size:19px}
+a{color:var(--primary)}
+[dir=rtl] body{text-align:right}
+[dir=rtl] .stats{flex-direction:row-reverse}
+[dir=rtl] .check-row{flex-direction:row-reverse;justify-content:flex-end}
+@media(max-width:600px){
+  header{padding:13px 5%}
+  .hero{padding:48px 15px 30px}
+  .hero p{font-size:15px}
+  .tools{padding:12px;gap:14px}
+  .card{padding:19px}
+  .section-heading{font-size:23px}
 }
-
-.search-wrap {
-  max-width: 490px;
-  margin: 28px auto 0;
-  position: relative;
-}
-
-.search-wrap input {
-  width: 100%;
-  padding: 16px 19px;
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  background: white;
-  box-shadow: var(--shadow);
-  font-size: 15px;
-  margin: 0;
-}
-
-.section-heading {
-  text-align: center;
-  margin: 35px 0 5px;
-  font-size: 27px;
-}
-
-.section-description {
-  text-align: center;
-  color: var(--muted);
-  margin: 0 15px 20px;
-}
-
-.tools {
-  max-width: 1150px;
-  margin: 25px auto 65px;
-  padding: 15px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr));
-  gap: 20px;
-}
-
-.card {
-  background: var(--card);
-  padding: 24px;
-  border-radius: 18px;
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow);
-  min-width: 0;
-  transition: transform .2s, box-shadow .2s;
-}
-
-.card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 13px 35px rgba(37, 99, 235, .11);
-}
-
-.card[hidden] {
-  display: none;
-}
-
-.card h2 {
-  font-size: 19px;
-  margin: 0 0 6px;
-}
-
-.card .description {
-  font-size: 13px;
-  color: var(--muted);
-  margin: 0 0 16px;
-}
-
-textarea,
-input {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  margin: 7px 0;
-  font: inherit;
-  color: var(--text);
-  background: white;
-}
-
-textarea {
-  height: 115px;
-  resize: vertical;
-}
-
-input[type="range"] {
-  accent-color: var(--primary);
-}
-
-.result {
-  background: var(--soft);
-  color: var(--text);
-  padding: 12px;
-  border-radius: 10px;
-  margin-top: 12px;
-  font-size: 14px;
-  overflow-wrap: anywhere;
-  min-height: 43px;
-}
-
-.stats {
-  display: flex;
-  justify-content: space-between;
-  gap: 8px;
-  margin-top: 10px;
-  color: var(--muted);
-  font-size: 12px;
-}
-
-.actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 9px;
-}
-
-.actions button {
-  flex: 1;
-  min-width: 90px;
-}
-
-.small-label {
-  font-size: 13px;
-  color: var(--muted);
-  font-weight: bold;
-  display: block;
-  margin-top: 10px;
-}
-
-.qr-output {
-  display: flex;
-  justify-content: center;
-  margin-top: 15px;
-  min-height: 20px;
-}
-
-.qr-output img,
-.qr-output canvas {
-  max-width: 100%;
-  height: auto;
-  background: white;
-  padding: 10px;
-  border-radius: 10px;
-}
-
-.check-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 13px;
-  margin: 8px 0;
-}
-
-.check-row input {
-  width: auto;
-  margin: 0;
-  accent-color: var(--primary);
-}
-
-.no-results {
-  display: none;
-  text-align: center;
-  color: var(--muted);
-  padding: 25px;
-  grid-column: 1 / -1;
-}
-
-footer {
-  text-align: center;
-  padding: 32px 15px;
-  background: white;
-  color: var(--muted);
-  border-top: 1px solid var(--border);
-  font-size: 13px;
-}
-
-footer strong {
-  color: var(--primary);
-  font-size: 19px;
-}
-
-[dir="rtl"] body {
-  text-align: right;
-}
-
-[dir="rtl"] .stats {
-  flex-direction: row-reverse;
-}
-
-[dir="rtl"] .check-row {
-  flex-direction: row-reverse;
-  justify-content: flex-end;
-}
-
-@media(max-width:600px) {
-  header {
-    padding: 13px 5%;
-  }
-
-  .hero {
-    padding: 50px 15px 30px;
-  }
-
-  .hero p {
-    font-size: 15px;
-  }
-
-  .tools {
-    padding: 12px;
-    gap: 14px;
-  }
-
-  .card {
-    padding: 19px;
-  }
-
-  .section-heading {
-    font-size: 23px;
-  }
-}
-
-@media(prefers-reduced-motion:reduce) {
-  *,
-  *::before,
-  *::after {
-    transition: none !important;
-    scroll-behavior: auto !important;
-  }
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition:none!important;scroll-behavior:auto!important}
 }
 </style>
 </head>
 
 <body>
-
 <header>
   <a class="logo" href="#">EasyKit.</a>
   <button class="secondary" onclick="toggleLanguage()" id="langBtn">العربية</button>
@@ -374,15 +186,8 @@ footer strong {
   <span class="tag" id="tagline">✨ FREE ONLINE TOOLS</span>
   <h1 id="heading">Free Online Tools for Everyday Tasks</h1>
   <p id="subtitle">Simple, useful tools that save you time. Fast, free and easy to use.</p>
-
   <div class="search-wrap">
-    <input
-      type="search"
-      id="toolSearch"
-      placeholder="🔎 Search for a tool..."
-      aria-label="Search tools"
-      oninput="filterTools()"
-    >
+    <input type="search" id="toolSearch" placeholder="🔎 Search for a tool..." oninput="filterTools()">
   </div>
 </section>
 
@@ -391,600 +196,577 @@ footer strong {
 
 <main class="tools" id="toolsGrid">
 
-  <!-- WORD COUNTER -->
-  <div class="card">
-    <h2 id="wordTitle">📝 Word Counter</h2>
-    <p class="description" id="wordDesc">Count words, characters and reading time.</p>
-    <textarea id="words" placeholder="Type or paste your text..." oninput="countWords()"></textarea>
-    <div class="result" id="wordResult">Words: 0 | Characters: 0</div>
-    <div class="stats">
-      <span id="readingTime">Reading time: 0 min</span>
-      <span id="sentenceCount">Sentences: 0</span>
-    </div>
-  </div>
+<!-- 1 WORD COUNTER -->
+<div class="card">
+<h2>📝 Word Counter</h2>
+<p class="description">Count words, characters and reading time.</p>
+<textarea id="words" placeholder="Type or paste your text..." oninput="countWords()"></textarea>
+<div class="result" id="wordResult">Words: 0 | Characters: 0</div>
+<div class="stats"><span id="readingTime">Reading time: 0 min</span><span id="sentenceCount">Sentences: 0</span></div>
+</div>
 
-  <!-- PERCENTAGE CALCULATOR -->
-  <div class="card">
-    <h2 id="percentTitle">🧮 Percentage Calculator</h2>
-    <p class="description" id="percentDesc">Calculate any percentage quickly.</p>
-    <label class="small-label" id="numberLabel" for="number">Number</label>
-    <input type="number" id="number" placeholder="Enter number">
-    <label class="small-label" id="percentLabel" for="percent">Percentage (%)</label>
-    <input type="number" id="percent" placeholder="Enter percentage">
-    <button onclick="calculate()" id="calculateBtn">Calculate</button>
-    <div class="result" id="percentResult" aria-live="polite">Your result will appear here.</div>
-  </div>
+<!-- 2 PERCENTAGE CALCULATOR -->
+<div class="card">
+<h2>🧮 Percentage Calculator</h2>
+<p class="description">Calculate any percentage quickly.</p>
+<label class="small-label" for="number">Number</label>
+<input type="number" id="number" placeholder="Enter number">
+<label class="small-label" for="percent">Percentage (%)</label>
+<input type="number" id="percent" placeholder="Enter percentage">
+<button onclick="calculate()">Calculate</button>
+<div class="result" id="percentResult" aria-live="polite">Your result will appear here.</div>
+</div>
 
-  <!-- TEXT CONVERTER -->
-  <div class="card">
-    <h2 id="textTitle">🔤 Text Case Converter</h2>
-    <p class="description" id="textDesc">Change your text into different styles.</p>
-    <textarea id="convertText" placeholder="Enter text to convert..."></textarea>
-    <div class="actions">
-      <button onclick="convert('upper')" id="upperBtn">UPPERCASE</button>
-      <button onclick="convert('lower')" id="lowerBtn">lowercase</button>
-      <button onclick="convert('title')" id="titleBtn">Title Case</button>
-      <button onclick="convert('sentence')" id="sentenceBtn">Sentence case</button>
-    </div>
-    <div class="result" id="convertResult" aria-live="polite">Your converted text appears here.</div>
-    <button class="secondary" onclick="copyText('convertResult')" id="copyTextBtn" style="margin-top:10px">Copy Text</button>
-  </div>
+<!-- 3 TEXT CASE CONVERTER -->
+<div class="card">
+<h2>🔤 Text Case Converter</h2>
+<p class="description">Change your text into different styles.</p>
+<textarea id="convertText" placeholder="Enter text to convert..."></textarea>
+<div class="actions">
+<button onclick="convert('upper')">UPPERCASE</button>
+<button onclick="convert('lower')">lowercase</button>
+<button onclick="convert('title')">Title Case</button>
+<button onclick="convert('sentence')">Sentence case</button>
+</div>
+<div class="result" id="convertResult">Your converted text appears here.</div>
+<button class="secondary" onclick="copyValue('convertResult')">Copy Text</button>
+</div>
 
-  <!-- QR GENERATOR -->
-  <div class="card">
-    <h2 id="qrTitle">📱 QR Code Generator</h2>
-    <p class="description" id="qrDesc">Turn text or a website address into a QR code.</p>
-    <input id="qrInput" placeholder="Enter text or website address">
-    <button onclick="generateQR()" id="qrBtn">Generate QR Code</button>
-    <div class="qr-output" id="qrOutput"></div>
-    <button class="secondary" onclick="downloadQR()" id="qrDownload" style="display:none;margin-top:12px">Download QR Code</button>
-    <div class="result" id="qrMessage" aria-live="polite">Your QR code will appear here.</div>
-  </div>
+<!-- 4 QR GENERATOR -->
+<div class="card">
+<h2>📱 QR Code Generator</h2>
+<p class="description">Turn text or a website address into a QR code.</p>
+<input id="qrInput" placeholder="Enter text or website address">
+<button onclick="generateQR()">Generate QR Code</button>
+<div class="qr-output" id="qrOutput"></div>
+<button class="secondary" onclick="downloadQR()" id="qrDownload" hidden>Download QR Code</button>
+<div class="result" id="qrMessage">Your QR code will appear here.</div>
+</div>
 
-  <!-- PASSWORD GENERATOR -->
-  <div class="card">
-    <h2 id="passwordTitle">🔐 Password Generator</h2>
-    <p class="description" id="passwordDesc">Create a random password on your device.</p>
-    <label class="small-label" id="lengthLabel" for="passLength">Password length: 16</label>
-    <input type="range" id="passLength" min="8" max="40" value="16" oninput="updateLength()">
-    <label class="check-row"><input type="checkbox" id="includeUpper" checked> <span id="upperLabel">Uppercase letters (A-Z)</span></label>
-    <label class="check-row"><input type="checkbox" id="includeLower" checked> <span id="lowerLabel">Lowercase letters (a-z)</span></label>
-    <label class="check-row"><input type="checkbox" id="includeNumbers" checked> <span id="numberCharsLabel">Numbers (0-9)</span></label>
-    <label class="check-row"><input type="checkbox" id="includeSymbols" checked> <span id="symbolsLabel">Symbols (!@#$...)</span></label>
-    <button onclick="generatePassword()" id="passBtn">Generate Password</button>
-    <div class="result" id="passwordResult" aria-live="polite">Your password will appear here.</div>
-    <button class="secondary" onclick="copyText('passwordResult')" id="copyPassBtn" style="margin-top:10px">Copy Password</button>
-  </div>
+<!-- 5 PASSWORD GENERATOR -->
+<div class="card">
+<h2>🔐 Password Generator</h2>
+<p class="description">Create a random password on your device.</p>
+<label class="small-label" for="passLength" id="lengthLabel">Password length: 16</label>
+<input type="range" id="passLength" min="8" max="40" value="16" oninput="updateLength()">
+<label class="check-row"><input type="checkbox" id="includeUpper" checked> Uppercase letters (A-Z)</label>
+<label class="check-row"><input type="checkbox" id="includeLower" checked> Lowercase letters (a-z)</label>
+<label class="check-row"><input type="checkbox" id="includeNumbers" checked> Numbers (0-9)</label>
+<label class="check-row"><input type="checkbox" id="includeSymbols" checked> Symbols (!@#$...)</label>
+<button onclick="generatePassword()">Generate Password</button>
+<div class="result" id="passwordResult">Your password will appear here.</div>
+<button class="secondary" onclick="copyValue('passwordResult')">Copy Password</button>
+</div>
 
-  <!-- AGE CALCULATOR -->
-  <div class="card">
-    <h2 id="ageTitle">🎂 Age Calculator</h2>
-    <p class="description" id="ageDesc">Find your age in years, months and days.</p>
-    <label class="small-label" id="birthLabel" for="birthDate">Your date of birth</label>
-    <input type="date" id="birthDate">
-    <button onclick="calculateAge()" id="ageBtn">Calculate Age</button>
-    <div class="result" id="ageResult" aria-live="polite">Your age will appear here.</div>
-  </div>
+<!-- 6 AGE CALCULATOR -->
+<div class="card">
+<h2>🎂 Age Calculator</h2>
+<p class="description">Find your age in years, months and days.</p>
+<label class="small-label" for="birthDate">Your date of birth</label>
+<input type="date" id="birthDate">
+<button onclick="calculateAge()">Calculate Age</button>
+<div class="result" id="ageResult">Your age will appear here.</div>
+</div>
 
-  <p class="no-results" id="noResults">No tools found. Try another search.</p>
+<!-- 7 UNIT CONVERTER -->
+<div class="card">
+<h2>📏 Unit Converter</h2>
+<p class="description">Convert length, weight, temperature, speed, area, volume and data.</p>
+<select id="unitType" onchange="loadUnits()">
+<option value="length">Length</option><option value="weight">Weight</option>
+<option value="temperature">Temperature</option><option value="speed">Speed</option>
+<option value="area">Area</option><option value="volume">Volume</option>
+<option value="data">Digital storage</option>
+</select>
+<input type="number" id="unitValue" placeholder="Enter value" oninput="convertUnits()">
+<div class="actions"><select id="unitFrom" onchange="convertUnits()"></select><select id="unitTo" onchange="convertUnits()"></select></div>
+<div class="result" id="unitResult">Result appears here.</div>
+</div>
 
+<!-- 8 SCIENTIFIC CALCULATOR -->
+<div class="card">
+<h2>🔬 Scientific Calculator</h2>
+<p class="description">Calculate expressions, powers, roots and more.</p>
+<input id="sciInput" placeholder="Example: (5 + 3) * 2">
+<div class="actions">
+<button onclick="scientificCalc()">Calculate</button>
+<button class="secondary" onclick="sciInsert('Math.sqrt(')">√</button>
+<button class="secondary" onclick="sciInsert('Math.PI')">π</button>
+<button class="secondary" onclick="sciInsert('Math.sin(')">sin</button>
+</div>
+<div class="result" id="sciResult">Result appears here.</div>
+<p class="description">Supported: + − × ÷, parentheses, Math.sqrt(), Math.sin(), Math.cos(), Math.tan(), Math.PI, Math.pow().</p>
+</div>
+
+<!-- 9 STOPWATCH AND TIMER -->
+<div class="card">
+<h2>⏱️ Stopwatch & Timer</h2>
+<p class="description">Track time or run a countdown.</p>
+<div class="result" id="stopwatchDisplay">00:00:00</div>
+<div class="actions">
+<button onclick="startStopwatch()">Start</button>
+<button class="secondary" onclick="stopStopwatch()">Stop</button>
+<button class="secondary" onclick="resetStopwatch()">Reset</button>
+</div>
+<input type="number" id="timerSeconds" min="1" placeholder="Countdown seconds">
+<button onclick="startTimer()">Start Timer</button>
+<div class="result" id="timerDisplay">Timer ready.</div>
+</div>
+
+<!-- 10 COLOR PICKER -->
+<div class="card">
+<h2>🎨 Color Picker</h2>
+<p class="description">Choose a color and get HEX, RGB and HSL codes.</p>
+<input type="color" id="colorInput" value="#2563eb" oninput="updateColor()">
+<div class="result" id="colorResult"></div>
+<div class="actions">
+<button class="secondary" onclick="copyColor('hex')">Copy HEX</button>
+<button class="secondary" onclick="copyColor('rgb')">Copy RGB</button>
+<button class="secondary" onclick="copyColor('hsl')">Copy HSL</button>
+</div>
+</div>
+
+<!-- 11 JSON FORMATTER -->
+<div class="card">
+<h2>🧩 JSON Formatter</h2>
+<p class="description">Format and validate JSON data.</p>
+<textarea id="jsonInput" placeholder='Paste JSON here...'></textarea>
+<button onclick="formatJSON()">Format JSON</button>
+<div class="result" id="jsonResult">Your formatted JSON appears here.</div>
+<button class="secondary" onclick="copyValue('jsonResult')">Copy JSON</button>
+</div>
+
+<!-- 12 TEXT COMPARE -->
+<div class="card">
+<h2>🔍 Text Compare</h2>
+<p class="description">Compare two texts and see whether they match.</p>
+<textarea id="compareA" placeholder="First text..."></textarea>
+<textarea id="compareB" placeholder="Second text..."></textarea>
+<button onclick="compareTexts()">Compare</button>
+<div class="result" id="compareResult">Comparison appears here.</div>
+</div>
+
+<!-- 13 RANDOM NUMBER -->
+<div class="card">
+<h2>🎲 Random Number Generator</h2>
+<p class="description">Generate a random number in your chosen range.</p>
+<input type="number" id="randomMin" value="1" placeholder="Minimum">
+<input type="number" id="randomMax" value="100" placeholder="Maximum">
+<button onclick="generateRandom()">Generate</button>
+<div class="result" id="randomResult">Your number appears here.</div>
+</div>
+
+<!-- 14 IMAGE COMPRESSOR -->
+<div class="card">
+<h2>🖼️ Image Compressor</h2>
+<p class="description">Reduce image file size directly in your browser.</p>
+<input type="file" id="imageFile" accept="image/*">
+<label class="small-label" for="imageQuality">Image quality</label>
+<input type="range" id="imageQuality" min="10" max="100" value="75">
+<button onclick="compressImage()">Compress Image</button>
+<div class="result" id="imageResult">Choose an image to begin.</div>
+<a id="imageDownload" hidden download="easykit-compressed.jpg">Download compressed image</a>
+</div>
+
+<!-- 15 URL ENCODER -->
+<div class="card">
+<h2>🔗 URL Encoder & Decoder</h2>
+<p class="description">Encode or decode text for URLs.</p>
+<textarea id="urlInput" placeholder="Enter text or URL..."></textarea>
+<div class="actions">
+<button onclick="processURL('encode')">Encode</button>
+<button onclick="processURL('decode')">Decode</button>
+</div>
+<div class="result" id="urlResult">Result appears here.</div>
+<button class="secondary" onclick="copyValue('urlResult')">Copy Result</button>
+</div>
+
+<!-- 16 TYPING SPEED TEST -->
+<div class="card">
+<h2>⌨️ Typing Speed Test</h2>
+<p class="description">Test your typing speed and accuracy.</p>
+<div class="result" id="typingPrompt">The quick brown fox jumps over the lazy dog.</div>
+<textarea id="typingInput" placeholder="Start typing the sentence..." oninput="typingTest()"></textarea>
+<div class="result" id="typingResult">Your speed will appear here.</div>
+<button class="secondary" onclick="resetTyping()">Restart Test</button>
+</div>
+
+<p class="no-results" id="noResults">No tools found. Try another search.</p>
 </main>
 
 <footer>
-  <strong>EasyKit.</strong>
-  <p id="footerText">© 2026 EasyKit. Free tools for everyone.</p>
+<strong>EasyKit.</strong>
+<p id="footerText">© 2026 EasyKit. Free tools for everyone.</p>
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-
 <script>
-let arabic = false;
+let arabic=false;
+const $=id=>document.getElementById(id);
 
-const translations = {
-  en: {
-    lang: "العربية",
-    tagline: "✨ FREE ONLINE TOOLS",
-    heading: "Free Online Tools for Everyday Tasks",
-    subtitle: "Simple, useful tools that save you time. Fast, free and easy to use.",
-    toolsHeading: "Our Free Tools",
-    toolsDescription: "Everything you need in one simple place.",
-    wordTitle: "📝 Word Counter",
-    wordDesc: "Count words, characters and reading time.",
-    wordPlaceholder: "Type or paste your text...",
-    percentTitle: "🧮 Percentage Calculator",
-    percentDesc: "Calculate any percentage quickly.",
-    numberLabel: "Number",
-    percentLabel: "Percentage (%)",
-    numberPlaceholder: "Enter number",
-    percentPlaceholder: "Enter percentage",
-    calculateBtn: "Calculate",
-    resultPlaceholder: "Your result will appear here.",
-    textTitle: "🔤 Text Case Converter",
-    textDesc: "Change your text into different styles.",
-    textPlaceholder: "Enter text to convert...",
-    upperBtn: "UPPERCASE",
-    lowerBtn: "lowercase",
-    titleBtn: "Title Case",
-    sentenceBtn: "Sentence case",
-    copyTextBtn: "Copy Text",
-    converted: "Your converted text appears here.",
-    qrTitle: "📱 QR Code Generator",
-    qrDesc: "Turn text or a website address into a QR code.",
-    qrPlaceholder: "Enter text or website address",
-    qrBtn: "Generate QR Code",
-    qrDownload: "Download QR Code",
-    qrEmpty: "Please enter some text first.",
-    qrError: "QR code library could not load. Check your internet connection and refresh.",
-    qrSuccess: "Your QR code is ready!",
-    passwordTitle: "🔐 Password Generator",
-    passwordDesc: "Create a random password on your device.",
-    lengthLabel: "Password length: ",
-    upperLabel: "Uppercase letters (A-Z)",
-    lowerLabel: "Lowercase letters (a-z)",
-    numberCharsLabel: "Numbers (0-9)",
-    symbolsLabel: "Symbols (!@#$...)",
-    passBtn: "Generate Password",
-    passEmpty: "Select at least one character type.",
-    passResult: "Your password will appear here.",
-    copyPassBtn: "Copy Password",
-    ageTitle: "🎂 Age Calculator",
-    ageDesc: "Find your age in years, months and days.",
-    birthLabel: "Your date of birth",
-    ageBtn: "Calculate Age",
-    agePlaceholder: "Your age will appear here.",
-    ageInvalid: "Please enter a valid date that is not in the future.",
-    reading: "Reading time: ",
-    min: " min",
-    sentences: "Sentences: ",
-    words: "Words: ",
-    characters: "Characters: ",
-    copied: "Copied!",
-    copyError: "Could not copy. Please select and copy the text.",
-    enterBoth: "Enter both numbers.",
-    invalidNumber: "Please enter valid numbers.",
-    noResult: "Your converted text appears here.",
-    ageYears: " years, ",
-    ageMonths: " months and ",
-    ageDays: " days",
-    footer: "© 2026 EasyKit. Free tools for everyone.",
-    searchPlaceholder: "🔎 Search for a tool...",
-    noResults: "No tools found. Try another search."
-  },
-
-  ar: {
-    lang: "English",
-    tagline: "✨ أدوات مجانية عبر الإنترنت",
-    heading: "أدوات مجانية لمهامك اليومية",
-    subtitle: "أدوات بسيطة ومفيدة توفر وقتك. سريعة ومجانية وسهلة الاستخدام.",
-    toolsHeading: "أدواتنا المجانية",
-    toolsDescription: "كل ما تحتاجه في مكان واحد.",
-    wordTitle: "📝 عداد الكلمات",
-    wordDesc: "احسب الكلمات والأحرف ووقت القراءة.",
-    wordPlaceholder: "اكتب أو الصق النص هنا...",
-    percentTitle: "🧮 حاسبة النسبة المئوية",
-    percentDesc: "احسب أي نسبة مئوية بسهولة.",
-    numberLabel: "الرقم",
-    percentLabel: "النسبة المئوية (%)",
-    numberPlaceholder: "أدخل الرقم",
-    percentPlaceholder: "أدخل النسبة",
-    calculateBtn: "احسب",
-    resultPlaceholder: "ستظهر النتيجة هنا.",
-    textTitle: "🔤 تحويل حالة النص",
-    textDesc: "حوّل النص إلى أنماط مختلفة.",
-    textPlaceholder: "أدخل النص للتحويل...",
-    upperBtn: "أحرف كبيرة",
-    lowerBtn: "أحرف صغيرة",
-    titleBtn: "أول حرف كبير",
-    sentenceBtn: "نمط الجملة",
-    copyTextBtn: "نسخ النص",
-    converted: "سيظهر النص المحوّل هنا.",
-    qrTitle: "📱 منشئ رمز QR",
-    qrDesc: "حوّل النص أو رابط الموقع إلى رمز QR.",
-    qrPlaceholder: "أدخل نصاً أو رابط موقع",
-    qrBtn: "إنشاء رمز QR",
-    qrDownload: "تحميل رمز QR",
-    qrEmpty: "يرجى إدخال نص أولاً.",
-    qrError: "تعذر تحميل مكتبة QR. تحقق من الإنترنت ثم حدّث الصفحة.",
-    qrSuccess: "رمز QR جاهز!",
-    passwordTitle: "🔐 منشئ كلمات المرور",
-    passwordDesc: "أنشئ كلمة مرور عشوائية على جهازك.",
-    lengthLabel: "طول كلمة المرور: ",
-    upperLabel: "أحرف كبيرة (A-Z)",
-    lowerLabel: "أحرف صغيرة (a-z)",
-    numberCharsLabel: "أرقام (0-9)",
-    symbolsLabel: "رموز (!@#$...)",
-    passBtn: "إنشاء كلمة مرور",
-    passEmpty: "اختر نوعاً واحداً على الأقل من الأحرف.",
-    passResult: "ستظهر كلمة المرور هنا.",
-    copyPassBtn: "نسخ كلمة المرور",
-    ageTitle: "🎂 حاسبة العمر",
-    ageDesc: "اعرف عمرك بالسنوات والأشهر والأيام.",
-    birthLabel: "تاريخ ميلادك",
-    ageBtn: "احسب العمر",
-    agePlaceholder: "سيظهر عمرك هنا.",
-    ageInvalid: "يرجى إدخال تاريخ صحيح ليس في المستقبل.",
-    reading: "وقت القراءة: ",
-    min: " دقيقة",
-    sentences: "الجمل: ",
-    words: "الكلمات: ",
-    characters: "الأحرف: ",
-    copied: "تم النسخ!",
-    copyError: "تعذر النسخ. يرجى تحديد النص ونسخه.",
-    enterBoth: "أدخل الرقمين.",
-    invalidNumber: "يرجى إدخال أرقام صحيحة.",
-    noResult: "سيظهر النص المحوّل هنا.",
-    ageYears: " سنة، ",
-    ageMonths: " شهر و",
-    ageDays: " يوم",
-    footer: "© 2026 EasyKit. أدوات مجانية للجميع.",
-    searchPlaceholder: "🔎 ابحث عن أداة...",
-    noResults: "لم يتم العثور على أدوات. جرّب بحثاً آخر."
-  }
+const translations={
+en:{
+tagline:"✨ FREE ONLINE TOOLS",
+heading:"Free Online Tools for Everyday Tasks",
+subtitle:"Simple, useful tools that save you time. Fast, free and easy to use.",
+toolsHeading:"Our Free Tools",
+toolsDescription:"Everything you need in one simple place.",
+footer:"© 2026 EasyKit. Free tools for everyone.",
+search:"🔎 Search for a tool...",
+noResults:"No tools found. Try another search."
+},
+ar:{
+tagline:"✨ أدوات مجانية عبر الإنترنت",
+heading:"أدوات مجانية لمهامك اليومية",
+subtitle:"أدوات بسيطة ومفيدة توفر وقتك. سريعة ومجانية وسهلة الاستخدام.",
+toolsHeading:"أدواتنا المجانية",
+toolsDescription:"كل ما تحتاجه في مكان واحد.",
+footer:"© 2026 EasyKit. أدوات مجانية للجميع.",
+search:"🔎 ابحث عن أداة...",
+noResults:"لم يتم العثور على أدوات. جرّب بحثاً آخر."
+}
 };
-
-function t(key) {
-  return translations[arabic ? "ar" : "en"][key];
+function t(key){return translations[arabic?"ar":"en"][key]}
+function toggleLanguage(){
+  arabic=!arabic;
+  document.documentElement.lang=arabic?"ar":"en";
+  document.documentElement.dir=arabic?"rtl":"ltr";
+  $("langBtn").textContent=arabic?"English":"العربية";
+  $("tagline").textContent=t("tagline");
+  $("heading").textContent=t("heading");
+  $("subtitle").textContent=t("subtitle");
+  $("toolsHeading").textContent=t("toolsHeading");
+  $("toolsDescription").textContent=t("toolsDescription");
+  $("footerText").textContent=t("footer");
+  $("toolSearch").placeholder=t("search");
+  $("noResults").textContent=t("noResults");
 }
 
-function setText(id, value) {
-  const element = document.getElementById(id);
-  if (element) element.textContent = value;
-}
-
-function toggleLanguage() {
-  arabic = !arabic;
-
-  document.documentElement.lang = arabic ? "ar" : "en";
-  document.documentElement.dir = arabic ? "rtl" : "ltr";
-
-  const textIds = [
-    "tagline", "heading", "subtitle",
-    "toolsHeading", "toolsDescription",
-    "wordTitle", "wordDesc",
-    "percentTitle", "percentDesc",
-    "numberLabel", "percentLabel", "calculateBtn",
-    "textTitle", "textDesc",
-    "upperBtn", "lowerBtn", "titleBtn", "sentenceBtn",
-    "copyTextBtn",
-    "qrTitle", "qrDesc", "qrBtn", "qrDownload",
-    "passwordTitle", "passwordDesc",
-    "upperLabel", "lowerLabel", "numberCharsLabel",
-    "symbolsLabel", "passBtn", "copyPassBtn",
-    "ageTitle", "ageDesc", "birthLabel", "ageBtn",
-    "footerText", "noResults"
-  ];
-
-  textIds.forEach(id => {
-    const element = document.getElementById(id);
-    const key = id === "footerText" ? "footer" : id;
-    if (element && t(key)) element.textContent = t(key);
+/* SEARCH */
+function filterTools(){
+  const query=$("toolSearch").value.trim().toLocaleLowerCase();
+  let count=0;
+  document.querySelectorAll("#toolsGrid .card").forEach(card=>{
+    const show=card.textContent.toLocaleLowerCase().includes(query);
+    card.hidden=!show;
+    if(show)count++;
   });
-
-  setText("langBtn", t("lang"));
-
-  document.getElementById("words").placeholder = t("wordPlaceholder");
-  document.getElementById("number").placeholder = t("numberPlaceholder");
-  document.getElementById("percent").placeholder = t("percentPlaceholder");
-  document.getElementById("convertText").placeholder = t("textPlaceholder");
-  document.getElementById("qrInput").placeholder = t("qrPlaceholder");
-  document.getElementById("toolSearch").placeholder = t("searchPlaceholder");
-
-  updateLength();
-  countWords();
-  filterTools();
+  $("noResults").style.display=count?"none":"block";
 }
 
-// SEARCH TOOLS
-function filterTools() {
-  const query = document.getElementById("toolSearch")
-    .value.trim().toLocaleLowerCase();
-
-  const cards = document.querySelectorAll("#toolsGrid .card");
-  let visibleCount = 0;
-
-  cards.forEach(card => {
-    const content = card.textContent.toLocaleLowerCase();
-    const matches = content.includes(query);
-
-    card.hidden = !matches;
-    if (matches) visibleCount++;
-  });
-
-  document.getElementById("noResults").style.display =
-    visibleCount === 0 ? "block" : "none";
+/* WORD COUNTER */
+function countWords(){
+  const text=$("words").value,trim=text.trim();
+  const words=trim?trim.split(/\s+/u).length:0;
+  $("wordResult").textContent=(arabic?"الكلمات: ":"Words: ")+words+
+    (arabic?" | الأحرف: ":" | Characters: ")+text.length;
+  $("readingTime").textContent=(arabic?"وقت القراءة: ":"Reading time: ")+
+    (words?Math.max(1,Math.ceil(words/200)):0)+(arabic?" دقيقة":" min");
+  $("sentenceCount").textContent=(arabic?"الجمل: ":"Sentences: ")+
+    (trim?(trim.match(/[.!?؟]+/g)||[]).length:0);
 }
 
-// WORD COUNTER
-function countWords() {
-  const text = document.getElementById("words").value;
-  const trimmed = text.trim();
-
-  const words = trimmed ? trimmed.split(/\s+/u).length : 0;
-  const chars = text.length;
-  const sentences = trimmed ? (trimmed.match(/[.!?؟]+/g) || []).length : 0;
-  const minutes = words === 0 ? 0 : Math.max(1, Math.ceil(words / 200));
-
-  document.getElementById("wordResult").textContent =
-    t("words") + words + " | " + t("characters") + chars;
-
-  document.getElementById("readingTime").textContent =
-    t("reading") + minutes + t("min");
-
-  document.getElementById("sentenceCount").textContent =
-    t("sentences") + sentences;
-}
-
-// PERCENTAGE CALCULATOR
-function calculate() {
-  const numberInput = document.getElementById("number").value;
-  const percentInput = document.getElementById("percent").value;
-  const resultElement = document.getElementById("percentResult");
-
-  if (numberInput.trim() === "" || percentInput.trim() === "") {
-    resultElement.textContent = t("enterBoth");
-    return;
+/* PERCENTAGE */
+function calculate(){
+  const a=$("number").value,b=$("percent").value;
+  if(a.trim()===""||b.trim()===""){
+    $("percentResult").textContent=arabic?"أدخل الرقمين.":"Enter both numbers.";return;
   }
-
-  const n = Number(numberInput);
-  const p = Number(percentInput);
-
-  if (!Number.isFinite(n) || !Number.isFinite(p)) {
-    resultElement.textContent = t("invalidNumber");
-    return;
+  const n=Number(a),p=Number(b);
+  if(!Number.isFinite(n)||!Number.isFinite(p)){
+    $("percentResult").textContent="Invalid numbers";return;
   }
-
-  const result = n * p / 100;
-
-  resultElement.textContent = result.toLocaleString(
-    arabic ? "ar-EG" : "en-US",
-    { maximumFractionDigits: 6 }
-  );
+  $("percentResult").textContent=(n*p/100).toLocaleString(undefined,{maximumFractionDigits:8});
 }
 
-// TEXT CONVERTER
-function convert(type) {
-  const text = document.getElementById("convertText").value;
-  let result = "";
-
-  if (type === "upper") {
-    result = text.toUpperCase();
-  } else if (type === "lower") {
-    result = text.toLowerCase();
-  } else if (type === "title") {
-    result = text.toLowerCase().replace(/\b\p{L}/gu,
-      char => char.toUpperCase());
-  } else if (type === "sentence") {
-    result = text.toLowerCase().replace(
-      /(^\s*\p{L}|[.!?؟]\s*\p{L})/gu,
-      char => char.toUpperCase()
-    );
-  }
-
-  document.getElementById("convertResult").textContent =
-    result || t("noResult");
+/* TEXT CONVERTER */
+function convert(type){
+  const text=$("convertText").value;
+  let result=text;
+  if(type==="upper")result=text.toUpperCase();
+  if(type==="lower")result=text.toLowerCase();
+  if(type==="title")result=text.toLowerCase().replace(/\b\p{L}/gu,c=>c.toUpperCase());
+  if(type==="sentence")result=text.toLowerCase().replace(/(^\s*\p{L}|[.!?؟]\s*\p{L})/gu,c=>c.toUpperCase());
+  $("convertResult").textContent=result||"No text entered.";
 }
 
-// COPY TEXT
-async function copyText(id) {
-  const element = document.getElementById(id);
-  const text = element.textContent.trim();
-
-  if (!text) return;
-
-  if (
-    text === t("noResult") ||
-    text === t("passResult") ||
-    text === t("agePlaceholder") ||
-    text === t("resultPlaceholder")
-  ) return;
-
-  try {
+/* COPY */
+async function copyValue(id){
+  const text=$(id).textContent.trim();
+  if(!text)return;
+  try{
     await navigator.clipboard.writeText(text);
-
-    const button = id === "passwordResult"
-      ? document.getElementById("copyPassBtn")
-      : document.getElementById("copyTextBtn");
-
-    const oldText = button.textContent;
-    button.textContent = t("copied");
-
-    setTimeout(() => {
-      button.textContent = oldText;
-    }, 1500);
-
-  } catch {
-    alert(t("copyError"));
+    alert(arabic?"تم النسخ!":"Copied!");
+  }catch{
+    alert(arabic?"تعذر النسخ.":"Could not copy. Select and copy manually.");
   }
 }
 
-// QR CODE GENERATOR
-function generateQR() {
-  const value = document.getElementById("qrInput").value.trim();
-  const output = document.getElementById("qrOutput");
-  const message = document.getElementById("qrMessage");
-  const download = document.getElementById("qrDownload");
-
-  output.innerHTML = "";
-  download.style.display = "none";
-
-  if (!value) {
-    message.textContent = t("qrEmpty");
-    return;
-  }
-
-  if (typeof QRCode === "undefined") {
-    message.textContent = t("qrError");
-    return;
-  }
-
-  new QRCode(output, {
-    text: value,
-    width: 200,
-    height: 200,
-    colorDark: "#172554",
-    colorLight: "#ffffff",
-    correctLevel: QRCode.CorrectLevel.H
-  });
-
-  message.textContent = t("qrSuccess");
-  download.style.display = "inline-block";
+/* QR */
+function generateQR(){
+  const value=$("qrInput").value.trim(),output=$("qrOutput");
+  output.innerHTML="";
+  $("qrDownload").hidden=true;
+  if(!value){$("qrMessage").textContent=arabic?"أدخل نصاً أولاً.":"Please enter some text.";return}
+  if(typeof QRCode==="undefined"){$("qrMessage").textContent="QR library unavailable. Check your connection.";return}
+  new QRCode(output,{text:value,width:200,height:200,colorDark:"#172554",colorLight:"#ffffff",correctLevel:QRCode.CorrectLevel.H});
+  $("qrMessage").textContent=arabic?"رمز QR جاهز!":"Your QR code is ready!";
+  $("qrDownload").hidden=false;
+}
+function downloadQR(){
+  const canvas=$("qrOutput").querySelector("canvas");
+  const image=$("qrOutput").querySelector("img");
+  const url=canvas?canvas.toDataURL("image/png"):image?.src;
+  if(!url)return;
+  const link=document.createElement("a");
+  link.href=url;link.download="easykit-qr.png";link.click();
 }
 
-function downloadQR() {
-  const output = document.getElementById("qrOutput");
-  const canvas = output.querySelector("canvas");
-  const image = output.querySelector("img");
-  let url = "";
-
-  if (canvas) {
-    url = canvas.toDataURL("image/png");
-  } else if (image) {
-    url = image.src;
-  }
-
-  if (!url) return;
-
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = "easykit-qr.png";
-  link.click();
+/* PASSWORD GENERATOR */
+function updateLength(){$("lengthLabel").textContent=(arabic?"طول كلمة المرور: ":"Password length: ")+$("passLength").value}
+function secureRandom(max){
+  if(!crypto?.getRandomValues)throw Error("Secure random unavailable");
+  const array=new Uint32Array(1),limit=Math.floor(4294967296/max)*max;
+  do{crypto.getRandomValues(array)}while(array[0]>=limit);
+  return array[0]%max;
 }
-
-// PASSWORD GENERATOR
-function updateLength() {
-  const length = document.getElementById("passLength").value;
-
-  document.getElementById("lengthLabel").textContent =
-    t("lengthLabel") + length;
-}
-
-function secureRandom(max) {
-  if (!window.crypto || !window.crypto.getRandomValues) {
-    throw new Error("Secure random generator unavailable.");
-  }
-
-  const array = new Uint32Array(1);
-  const limit = Math.floor(4294967296 / max) * max;
-
-  do {
-    crypto.getRandomValues(array);
-  } while (array[0] >= limit);
-
-  return array[0] % max;
-}
-
-function shuffleSecure(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = secureRandom(i + 1);
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-
-  return array;
-}
-
-function generatePassword() {
-  const length = Number(document.getElementById("passLength").value);
-  const groups = [];
-
-  if (document.getElementById("includeUpper").checked)
-    groups.push("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
-
-  if (document.getElementById("includeLower").checked)
-    groups.push("abcdefghijklmnopqrstuvwxyz");
-
-  if (document.getElementById("includeNumbers").checked)
-    groups.push("0123456789");
-
-  if (document.getElementById("includeSymbols").checked)
-    groups.push("!@#$%^&*()-_=+[]{}");
-
-  const output = document.getElementById("passwordResult");
-
-  if (!groups.length) {
-    output.textContent = t("passEmpty");
-    return;
-  }
-
-  try {
-    const allChars = groups.join("");
-    const password = [];
-
-    groups.forEach(group => {
-      password.push(group[secureRandom(group.length)]);
-    });
-
-    while (password.length < length) {
-      password.push(allChars[secureRandom(allChars.length)]);
+function generatePassword(){
+  const groups=[];
+  if($("includeUpper").checked)groups.push("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+  if($("includeLower").checked)groups.push("abcdefghijklmnopqrstuvwxyz");
+  if($("includeNumbers").checked)groups.push("0123456789");
+  if($("includeSymbols").checked)groups.push("!@#$%^&*()-_=+[]{}");
+  if(!groups.length){$("passwordResult").textContent="Select at least one character type.";return}
+  try{
+    const all=groups.join(""),length=Number($("passLength").value),pass=[];
+    groups.forEach(group=>pass.push(group[secureRandom(group.length)]));
+    while(pass.length<length)pass.push(all[secureRandom(all.length)]);
+    for(let i=pass.length-1;i>0;i--){
+      const j=secureRandom(i+1);[pass[i],pass[j]]=[pass[j],pass[i]];
     }
-
-    output.textContent = shuffleSecure(password).join("");
-
-  } catch {
-    output.textContent = "Secure password generation is unavailable in this browser.";
-  }
+    $("passwordResult").textContent=pass.join("");
+  }catch{$("passwordResult").textContent="Secure password generation unavailable."}
 }
 
-// AGE CALCULATOR
-function calculateAge() {
-  const value = document.getElementById("birthDate").value;
-  const result = document.getElementById("ageResult");
-
-  if (!value) {
-    result.textContent = t("ageInvalid");
-    return;
+/* AGE */
+function calculateAge(){
+  const value=$("birthDate").value;
+  if(!value){$("ageResult").textContent="Enter a date of birth.";return}
+  const [y,m,d]=value.split("-").map(Number);
+  const birth=new Date(y,m-1,d),today=new Date();
+  if(birth.getFullYear()!==y||birth.getMonth()!==m-1||birth.getDate()!==d||birth>today){
+    $("ageResult").textContent="Please enter a valid date.";return;
   }
-
-  const parts = value.split("-").map(Number);
-  const year = parts[0];
-  const month = parts[1];
-  const day = parts[2];
-
-  const birth = new Date(year, month - 1, day);
-  const today = new Date();
-
-  if (
-    birth.getFullYear() !== year ||
-    birth.getMonth() !== month - 1 ||
-    birth.getDate() !== day ||
-    birth > today
-  ) {
-    result.textContent = t("ageInvalid");
-    return;
-  }
-
-  let years = today.getFullYear() - year;
-  let months = today.getMonth() - (month - 1);
-  let days = today.getDate() - day;
-
-  if (days < 0) {
-    months--;
-
-    const previousMonth = new Date(
-      today.getFullYear(), today.getMonth(), 0
-    );
-
-    days += previousMonth.getDate();
-  }
-
-  if (months < 0) {
-    years--;
-    months += 12;
-  }
-
-  result.textContent =
-    years + t("ageYears") +
-    months + t("ageMonths") +
-    days + t("ageDays");
+  let years=today.getFullYear()-y,months=today.getMonth()-(m-1),days=today.getDate()-d;
+  if(days<0){months--;days+=new Date(today.getFullYear(),today.getMonth(),0).getDate()}
+  if(months<0){years--;months+=12}
+  $("ageResult").textContent=arabic?
+    `${years} سنة، ${months} شهر، ${days} يوم`:
+    `${years} years, ${months} months and ${days} days`;
 }
 
-// INITIALIZE
-document.getElementById("birthDate").max =
-  new Date().toISOString().split("T")[0];
+/* UNIT CONVERTER */
+const units={
+length:{Meter:1,Kilometer:1000,Centimeter:.01,Millimeter:.001,Mile:1609.344,Foot:.3048,Inch:.0254},
+weight:{Kilogram:1,Gram:.001,Milligram:.000001,Pound:.45359237,Ounce:.028349523125,Tonne:1000},
+speed:{"Meters/second":1,"Kilometers/hour":1/3.6,"Miles/hour":.44704,"Feet/second":.3048},
+area:{"Square meter":1,"Square kilometer":1e6,"Square centimeter":.0001,"Hectare":10000,"Acre":4046.8564224,"Square foot":.09290304},
+volume:{Liter:1,Milliliter:.001,"Cubic meter":1000,"US gallon":3.785411784,"US cup":.2365882365},
+data:{Byte:1,KB:1000,MB:1e6,GB:1e9,TB:1e12,KiB:1024,MiB:1048576,GiB:1073741824}
+};
+function loadUnits(){
+  const type=$("unitType").value;
+  let names=type==="temperature"?["Celsius","Fahrenheit","Kelvin"]:Object.keys(units[type]);
+  $("unitFrom").innerHTML=names.map(x=>`<option>${x}</option>`).join("");
+  $("unitTo").innerHTML=names.map((x,i)=>`<option ${i===1?"selected":""}>${x}</option>`).join("");
+  convertUnits();
+}
+function convertUnits(){
+  if(!$("unitFrom").value)return;
+  const value=Number($("unitValue").value),type=$("unitType").value;
+  if($("unitValue").value.trim()===""){$("unitResult").textContent="Enter a value.";return}
+  const from=$("unitFrom").value,to=$("unitTo").value;
+  let result=value;
+  if(type==="temperature"){
+    let c=from==="Celsius"?value:from==="Fahrenheit"?(value-32)*5/9:value-273.15;
+    result=to==="Celsius"?c:to==="Fahrenheit"?c*9/5+32:c+273.15;
+  }else{
+    result=value*units[type][from]/units[type][to];
+  }
+  $("unitResult").textContent=Number.isFinite(result)?result.toLocaleString(undefined,{maximumFractionDigits:8})+" "+to:"Invalid value";
+}
 
+/* SCIENTIFIC CALCULATOR */
+function sciInsert(value){$("sciInput").value+=value;$("sciInput").focus()}
+function scientificCalc(){
+  const expression=$("sciInput").value.trim();
+  if(!expression){$("sciResult").textContent="Enter an expression.";return}
+  // Allow only arithmetic characters, digits, dots, parentheses and selected Math functions.
+  const allowed=/^[0-9+\-*/().,\s%]*$/.test(expression)||
+    /^(?:(?:Math\.(?:sqrt|sin|cos|tan|abs|log|log10|pow|PI|E))|[0-9+\-*/().,\s%])*$/i.test(expression);
+  if(!allowed||/[a-zA-Z_$]/.test(expression.replace(/Math\.(sqrt|sin|cos|tan|abs|log|log10|pow|PI|E)/g,""))){
+    $("sciResult").textContent="Unsupported expression.";return;
+  }
+  try{
+    const result=Function('"use strict";return ('+expression+')')();
+    $("sciResult").textContent=Number.isFinite(result)?String(result):"Invalid result";
+  }catch{$("sciResult").textContent="Invalid expression."}
+}
+
+/* STOPWATCH */
+let watchStart=0,watchElapsed=0,watchInterval=null;
+function formatTime(ms){
+  const total=Math.floor(ms/1000),h=Math.floor(total/3600),m=Math.floor(total%3600/60),s=total%60;
+  return [h,m,s].map(x=>String(x).padStart(2,"0")).join(":");
+}
+function startStopwatch(){
+  if(watchInterval)return;
+  watchStart=Date.now()-watchElapsed;
+  watchInterval=setInterval(()=>{$("stopwatchDisplay").textContent=formatTime(Date.now()-watchStart)},200);
+}
+function stopStopwatch(){
+  if(!watchInterval)return;
+  watchElapsed=Date.now()-watchStart;clearInterval(watchInterval);watchInterval=null;
+}
+function resetStopwatch(){
+  stopStopwatch();watchElapsed=0;$("stopwatchDisplay").textContent="00:00:00";
+}
+
+/* TIMER */
+let timerInterval=null,timerEnd=0;
+function startTimer(){
+  clearInterval(timerInterval);
+  const seconds=Number($("timerSeconds").value);
+  if(!Number.isInteger(seconds)||seconds<1||seconds>86400){
+    $("timerDisplay").textContent="Enter a whole number from 1 to 86400.";return;
+  }
+  timerEnd=Date.now()+seconds*1000;
+  function tick(){
+    const left=Math.max(0,Math.ceil((timerEnd-Date.now())/1000));
+    $("timerDisplay").textContent=formatTime(left*1000);
+    if(left<=0){clearInterval(timerInterval);timerInterval=null;$("timerDisplay").textContent="Time is up!"}
+  }
+  tick();timerInterval=setInterval(tick,250);
+}
+
+/* COLOR PICKER */
+let colorCodes={};
+function updateColor(){
+  const hex=$("colorInput").value;
+  const r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);
+  const max=Math.max(r,g,b)/255,min=Math.min(r,g,b)/255,delta=max-min;
+  let h=0,s=0,l=(max+min)/2;
+  if(delta){
+    s=delta/(1-Math.abs(2*l-1));
+    if(max===r/255)h=60*(((g-b)/255/delta)%6);
+    else if(max===g/255)h=60*((b-r)/255/delta+2);
+    else h=60*((r-g)/255/delta+4);
+  }
+  if(h<0)h+=360;
+  colorCodes={hex:hex.toUpperCase(),rgb:`rgb(${r}, ${g}, ${b})`,hsl:`hsl(${Math.round(h)}, ${Math.round(s*100)}%, ${Math.round(l*100)}%)`};
+  $("colorResult").textContent=`${colorCodes.hex}\n${colorCodes.rgb}\n${colorCodes.hsl}`;
+}
+function copyColor(type){navigator.clipboard?.writeText(colorCodes[type]).then(()=>alert("Copied!")).catch(()=>alert("Copy unavailable."))}
+
+/* JSON FORMATTER */
+function formatJSON(){
+  try{$("jsonResult").textContent=JSON.stringify(JSON.parse($("jsonInput").value),null,2)}
+  catch{$("jsonResult").textContent="Invalid JSON. Please check your syntax."}
+}
+
+/* TEXT COMPARE */
+function compareTexts(){
+  const a=$("compareA").value,b=$("compareB").value;
+  $("compareResult").textContent=a===b?"The texts are identical.":"The texts are different.";
+}
+
+/* RANDOM NUMBER */
+function generateRandom(){
+  const min=Number($("randomMin").value),max=Number($("randomMax").value);
+  if(!Number.isSafeInteger(min)||!Number.isSafeInteger(max)||min>max){
+    $("randomResult").textContent="Enter valid whole numbers with minimum ≤ maximum.";return;
+  }
+  const range=max-min+1;
+  if(!Number.isSafeInteger(range)||range>4294967296){
+    $("randomResult").textContent="Range is too large.";return;
+  }
+  $("randomResult").textContent=String(min+secureRandom(range));
+}
+
+/* IMAGE COMPRESSOR */
+let compressedURL=null;
+function compressImage(){
+  const file=$("imageFile").files[0];
+  if(!file){$("imageResult").textContent="Choose an image first.";return}
+  if(!file.type.startsWith("image/")){$("imageResult").textContent="Please select an image.";return}
+  if(file.size>20*1024*1024){$("imageResult").textContent="Choose an image smaller than 20 MB.";return}
+  const reader=new FileReader();
+  reader.onload=()=>{
+    const img=new Image();
+    img.onload=()=>{
+      const maxDimension=2400,scale=Math.min(1,maxDimension/Math.max(img.width,img.height));
+      const canvas=document.createElement("canvas");
+      canvas.width=Math.round(img.width*scale);canvas.height=Math.round(img.height*scale);
+      const ctx=canvas.getContext("2d");
+      ctx.drawImage(img,0,0,canvas.width,canvas.height);
+      canvas.toBlob(blob=>{
+        if(!blob){$("imageResult").textContent="Compression failed.";return}
+        if(compressedURL)URL.revokeObjectURL(compressedURL);
+        compressedURL=URL.createObjectURL(blob);
+        $("imageDownload").href=compressedURL;
+        $("imageDownload").hidden=false;
+        $("imageResult").textContent=`Original: ${(file.size/1024).toFixed(1)} KB\nCompressed: ${(blob.size/1024).toFixed(1)} KB`;
+      },"image/jpeg",Number($("imageQuality").value)/100);
+    };
+    img.onerror=()=>{$("imageResult").textContent="Could not read this image."};
+    img.src=reader.result;
+  };
+  reader.onerror=()=>{$("imageResult").textContent="Could not load this file."};
+  reader.readAsDataURL(file);
+}
+
+/* URL ENCODER */
+function processURL(mode){
+  try{
+    $("urlResult").textContent=mode==="encode"?encodeURIComponent($("urlInput").value):decodeURIComponent($("urlInput").value);
+  }catch{$("urlResult").textContent="Invalid encoded text."}
+}
+
+/* TYPING SPEED TEST */
+const typingSentence="The quick brown fox jumps over the lazy dog.";
+let typingStart=null;
+function typingTest(){
+  const input=$("typingInput").value;
+  if(!typingStart&&input.length)typingStart=Date.now();
+  if(!typingStart){$("typingResult").textContent="Start typing to begin.";return}
+  const elapsed=Math.max(1,(Date.now()-typingStart)/60000);
+  const words=input.trim()?input.trim().split(/\s+/).length:0;
+  const wpm=Math.round(words/elapsed);
+  let correct=0;
+  for(let i=0;i<Math.min(input.length,typingSentence.length);i++){
+    if(input[i]===typingSentence[i])correct++;
+  }
+  const accuracy=input.length?Math.round(correct/input.length*100):100;
+  $("typingResult").textContent=`Speed: ${wpm} WPM | Accuracy: ${accuracy}%`;
+  if(input===typingSentence)$("typingResult").textContent+= " | Complete!";
+}
+function resetTyping(){
+  typingStart=null;$("typingInput").value="";
+  $("typingPrompt").textContent=typingSentence;
+  $("typingResult").textContent="Start typing to begin.";
+}
+
+/* INITIALIZE */
+$("birthDate").max=[
+  new Date().getFullYear(),
+  String(new Date().getMonth()+1).padStart(2,"0"),
+  String(new Date().getDate()).padStart(2,"0")
+].join("-");
+loadUnits();
+updateColor();
 updateLength();
 countWords();
 filterTools();
 </script>
-
 </body>
 </html>
